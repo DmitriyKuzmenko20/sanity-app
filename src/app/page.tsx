@@ -1,16 +1,19 @@
 import { Header } from '@/components/Header';
-import { headerQuery } from '@/schemas/shared/queris';
-import { HeaderSchema } from '@/schemas/shared/types';
+import { TopMenu } from '@/components/TopMenu';
+import { headerQuery, topMenuQuery } from '@/schemas/shared/queris';
+import { HeaderSchema, TopMenuSchema } from '@/schemas/shared/types';
 import { fetchSanityData } from '@/utils/sanity';
 
 export const revalidate = 30;
 
 export default async function Home() {
-	const headerResponse: HeaderSchema = await fetchSanityData(headerQuery);
+	const headerData: HeaderSchema = await fetchSanityData(headerQuery);
+	const topMenuData: TopMenuSchema = await fetchSanityData(topMenuQuery);
 
 	return (
 		<div>
-			<Header data={headerResponse} />
+			<Header data={headerData} />
+			<TopMenu data={topMenuData} />
 		</div>
 	);
 }
